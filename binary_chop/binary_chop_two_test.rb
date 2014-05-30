@@ -2,17 +2,30 @@ require 'minitest/autorun'
 
 class BinaryChopTwoTest < MiniTest::Unit::TestCase
 
-  def bfind(number, array, start, ending)
-    return -1 if start == array.length || ending < 0 || start > ending
-    position = start + ((ending - start) / 2)
-    if number == array[position]
-      return position
-    elsif number < array[position]
-      bfind(number, array, start, position - 1)
-    else
-      bfind(number, array, position + 1, ending)
-    end
-  end
+  # def bfind(number, array, start, ending)
+  #   return -1 if start == array.length || ending < 0 || start > ending
+  #   position = start + ((ending - start) / 2)
+  #   if number == array[position]
+  #     return position
+  #   elsif number < array[position]
+  #     return start + bfind(number, array, start, position - 1)
+  #   else
+  #     return position + bfind(number, array, position + 1, ending)
+  #   end
+  # end
+
+  # def bfind3(number, array)
+  #   ending = array.length
+  #   return -1 if ending == 0
+  #   position = ending / 2
+  #   if number == array[position]
+  #     return position
+  #   elsif number > array[position]
+  #     return position + bfind3(number,array[(position+1)..ending])
+  #   else
+  #     return bfind3(number,array[0..(position-1)])
+  #   end
+  # end
 
   def bfind2(number, array, start, ending)
     position = start + ((ending - start) / 2)
@@ -28,7 +41,7 @@ class BinaryChopTwoTest < MiniTest::Unit::TestCase
     array ||= []
     return -1 if array.empty?
     #both options work
-
+    #bfind3(number, array)
     ##one with more escape conditions
     #bfind(number, array, 0, array.length)
 
