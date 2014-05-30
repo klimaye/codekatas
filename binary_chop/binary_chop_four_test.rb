@@ -1,21 +1,31 @@
 require 'minitest/autorun'
 
-class BinaryChopTwoTest < MiniTest::Unit::TestCase
-  def bfind2(number, array, start, ending)
-    position = start + ((ending - start) / 2)
-    return position if number == array[position]
-    return -1 if start >= ending
-    if number < array[position]
-      bfind2(number, array, start, position - 1)
+class BinaryChopFourTest < MiniTest::Unit::TestCase
+  def sub(array,start,ending)
+    if ending < start
+      []
     else
-      bfind2(number, array, position + 1, ending)
+      array[start..ending]
+    end
+  end
+  
+  def bfind4(num, counter, array)
+    ending = array.length - 1
+    return -1 if ending < 0
+    mid = ending / 2
+    if array[mid] < num
+      bfind4(num, counter + mid + 1, array[(mid+1)..ending])       
+    elsif array[mid] > num
+      bfind4(num, 0, sub(array,0,mid-1))   
+    else
+      counter + mid
     end
   end
 
   def chop(number, array)
     array ||= []
     return -1 if array.empty?
-    bfind2(number, array, 0, array.length)
+    bfind4(number, 0, array)
   end
 
   def test_chop_one
