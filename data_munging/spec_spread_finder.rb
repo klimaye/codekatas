@@ -29,11 +29,12 @@ class SpreadFinderTests < MiniTest::Unit::TestCase
   end
 
   def test_calc_spread
-    assert_equal(1000, calc_spread("a","1"))
-    assert_equal(50, calc_spread("100","50"))
+    assert_equal(1000, calc_temp_spread(["test","a","1"]))
+    assert_equal(50, calc_temp_spread(["test", "100","50"]))
   end
 
   def test_find_day_with_smallest_spread
-    assert_equal("14",find_day_with_smallest_spread)
+    smallest_spread_hash = find_day_with_smallest_spread_redux
+    assert_equal("14", smallest_spread_hash[:item])
   end
 end

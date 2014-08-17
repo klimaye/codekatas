@@ -11,31 +11,20 @@ def goals_differential(entries, indexer)
   abs_diff(goals_for.to_i, goals_against.to_i)
 end
 
-def abs_diff(a, b)
-  (a - b).abs
-end
-
 def legit_line?(array)
   array.size == 10
 end
 
-def find_bad_team
+def find_bad_team_redux
   file = File.open('football.dat')
-  team = 'NOT SET'
-  min_difference = 100
   indexer = index_hash
-
-  file.each do |line|
-    array = split(line)
-    next unless legit_line?(array)
-    puts line
-    differential = goals_differential(array, indexer)
-    if differential < min_difference
-      min_difference = differential
-      team = array[indexer["Team"]]
-    end
+  find_item = Proc.new do |arr, idx|
+    arr[idx["Team"]]
   end
-
-  puts "Team with the smallest goal differential is #{team} with #{min_difference}"
-  team
+  legit_func = lambda { |array| legit_line?(array) }
+  diff_func = lambda { |arr, idx| goals_differential(arr, idx) }
+  result = find_matching_case(file, indexer, find_item, legit_func, diff_func)
+  puts result
+  result
 end
+

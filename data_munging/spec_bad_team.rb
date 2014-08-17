@@ -31,7 +31,8 @@ class TestBadTeam < MiniTest::Unit::TestCase
   end
 
   def test_find_bad_team
-    bad_team = find_bad_team
+    bad_team_hash = find_bad_team_redux
+    bad_team = bad_team_hash[:item]
     assert_equal("Aston_Villa", bad_team)
   end
 end
