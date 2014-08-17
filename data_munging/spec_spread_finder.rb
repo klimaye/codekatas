@@ -32,4 +32,8 @@ class SpreadFinderTests < MiniTest::Unit::TestCase
     assert_equal(1000, calc_spread("a","1"))
     assert_equal(50, calc_spread("100","50"))
   end
+
+  def test_find_day_with_smallest_spread
+    assert_equal("14",find_day_with_smallest_spread)
+  end
 end
